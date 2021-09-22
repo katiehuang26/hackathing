@@ -1,7 +1,7 @@
 # Hack-a-thing 1
+### Katie Huang, CS 98
 
-A basic Flutter project following their setup tutorial and first app tutorial.
-[Flutter docs](https://flutter.dev/docs)
+A basic Flutter project following their setup tutorial and first app tutorial at [Flutter docs](https://flutter.dev/docs).
 
 ## Short description of what you attempted to build
 I built a simple app that generates word pairs in an infinitely scrolling list. Each word pair has a heart beside it that you can tap, and hearted word pairs are saved in a separate view that you can access at the top right of the app.

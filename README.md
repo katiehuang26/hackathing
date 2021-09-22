@@ -1,12 +1,18 @@
-# hackathing
+# Hack-a-thing 1
 
 A basic Flutter project following their setup tutorial and first app tutorial.
-[Flutter docs](https://flutter.dev/docs),
+[Flutter docs](https://flutter.dev/docs)
 
 ## Short description of what you attempted to build
 I built a simple app that generates word pairs in an infinitely scrolling list. Each word pair has a heart beside it that you can tap, and hearted word pairs are saved in a separate view that you can access at the top right of the app.
 
 I also built upon this base app from the tutorial by changing the theme colors using the `ThemeData` widget, adding a button to delete your list of saved word pairs, and a pull-down refresher to clear out the suggested pairs and get new ones.
+
+### References
+Other than the Flutter docs, I also referenced the following for my code:
+- [Pull to refresh guide](https://www.geeksforgeeks.org/flutter-implementing-pull-to-refresh/)
+- [Use keys to force reload widgets](https://jelenaaa.medium.com/how-to-force-widget-to-redraw-in-flutter-2eec703bc024)
+- [Button onPressed](https://googleflutter.com/flutter-button-onpressed/)
 
 ## What you learned
 - I've never used React Native, so maybe it's not quite as amazing, but hot reloading is great!

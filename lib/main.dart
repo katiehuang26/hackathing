@@ -30,13 +30,12 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _saved = <WordPair>{};
+  var _suggestions = <WordPair>[];
+  var _saved = <WordPair>{};
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   void _pushSaved() {
     Navigator.of(context).push(
-      // NEW lines from here...
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
           final tiles = _saved.map(
@@ -53,29 +52,55 @@ class _RandomWordsState extends State<RandomWords> {
               ? ListTile.divideTiles(context: context, tiles: tiles).toList()
               : <Widget>[];
 
+          void clearSaved() {
+            setState(() {
+              _saved = {};
+            });
+          }
+
           return Scaffold(
             appBar: AppBar(
               title: Text('Saved Suggestions'),
             ),
             body: ListView(children: divided),
+            floatingActionButton: FloatingActionButton(
+              tooltip: 'delete', // used by assistive technologies
+              child: Icon(Icons.delete),
+              onPressed: () {
+                clearSaved();
+              }
+            ),
+            key: UniqueKey(),
           );
         },
-      ), // ...to here.
+      ),
     );
   }
 
   Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return const Divider(); /*2*/
+    return RefreshIndicator(
+        child: ListView.builder(
+            padding: const EdgeInsets.all(16.0),
+            itemBuilder: /*1*/ (context, i) {
+              if (i.isOdd) return const Divider(); /*2*/
 
-          final index = i ~/ 2; /*3*/
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
-          }
-          return _buildRow(_suggestions[index]);
-        });
+              final index = i ~/ 2; /*3*/
+              if (index >= _suggestions.length) {
+                _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+              }
+              return _buildRow(_suggestions[index]);
+            }),
+        onRefresh: () {
+          return Future.delayed(
+            Duration(seconds: 1), () {
+              setState(() {
+                _suggestions = [];
+                _suggestions.addAll(generateWordPairs().take(10));
+              });
+            },
+          );
+        }
+    );
   }
 
   Widget _buildRow(WordPair pair) {
@@ -85,10 +110,10 @@ class _RandomWordsState extends State<RandomWords> {
         pair.asPascalCase,
         style: _biggerFont,
       ),
-      trailing: Icon(   // NEW from here...
+      trailing: Icon(
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
-      ),                // ... to here.
+      ),
     onTap: () {
       setState(() {
         if (alreadySaved) {

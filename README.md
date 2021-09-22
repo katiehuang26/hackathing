@@ -1,5 +1,5 @@
 # Hack-a-thing 1
-### Katie Huang, CS 98
+# Katie Huang, CS 98
 
 A basic Flutter project following their setup tutorial and first app tutorial at [Flutter docs](https://flutter.dev/docs).
 
